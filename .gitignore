@@ -1,0 +1,19 @@
+node_modules
+dist
+
+# ESLint cache file
+.eslintcache
+
+# Ensure NPM lockfile isn't included by mistake - prefer yarn.lock
+package-lock.json
+
+# Any log files
+*.log
+
+coverage
+
+.env
+
+.vscode/settings.json
+
+.DS_Store
