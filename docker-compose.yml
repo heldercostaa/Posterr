@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres
+    container_name: posterrdb-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=posterrdb
+    volumes:
+      - pgdata:/data/postgres
+  
+  app:
+    build: .
+    container_name: posterr
+    ports:
+      - 3333:3333
+      - 9229:9229 # Debug port
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local
