@@ -2,25 +2,35 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { v4 as uuidV4 } from 'uuid';
 
 @Entity('user')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
-  username: string; // TODO: Should not be longer than 14 chars and be only alphanumeric
+  username: string;
 
-  // followers: this[];
+  @ManyToMany(() => User, (user) => user.following)
+  @JoinTable()
+  followers: this[];
 
-  // following: this[];
+  @ManyToMany(() => User, (user) => user.followers)
+  following: this[];
 
   @CreateDateColumn()
   created_at: string;
 
   @UpdateDateColumn()
   updated_at: string;
+
+  constructor() {
+    if (!this.id) this.id = uuidV4();
+  }
 }
