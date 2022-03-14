@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import createUserController from '../modules/account/useCases/createUser';
+import followUserController from '../modules/account/useCases/followUser';
 import getUserController from '../modules/account/useCases/getUser';
 
 export const userRoutes = Router();
@@ -11,4 +12,8 @@ userRoutes.post('/', (request, response) => {
 
 userRoutes.get('/:username', (request, response) => {
   return getUserController().handle(request, response);
+});
+
+userRoutes.post('/follow/:userBeingFollowedUsername', (request, response) => {
+  return followUserController().handle(request, response);
 });

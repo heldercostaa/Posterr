@@ -1,6 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { AppError } from '../../../../errors/AppError';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { IFindByUsernameDTO } from '../../dtos/IFindByUsernameDTO';
 import { IFollowUserDTO } from '../../dtos/IFollowUserDTO';
@@ -24,7 +23,7 @@ export class UserRepository implements IUserRepository {
     username,
     includeFollowers = false,
     includeFollowing = false,
-  }: IFindByUsernameDTO): Promise<User> {
+  }: IFindByUsernameDTO): Promise<User | undefined> {
     const relations = [];
 
     if (includeFollowers) relations.push('followers');
@@ -39,10 +38,12 @@ export class UserRepository implements IUserRepository {
   }
 
   async follow({
-    userToFollowId,
-    userToBeFollowedId,
-  }: IFollowUserDTO): Promise<User> {
-    // TODO: Implement
-    throw new AppError('Method not implemented');
+    userWhoFollowsId,
+    userBeingFollowedId,
+  }: IFollowUserDTO): Promise<void> {
+    await this.repository.manager.query(
+      `INSERT INTO "user_follow_user" ("user_who_follows_id", "user_being_followed_id") VALUES ($1, $2)`,
+      [userWhoFollowsId, userBeingFollowedId]
+    );
   }
 }

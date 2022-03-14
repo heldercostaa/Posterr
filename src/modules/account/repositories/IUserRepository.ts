@@ -5,6 +5,6 @@ import { User } from '../entities/User';
 
 export interface IUserRepository {
   create(data: ICreateUserDTO): Promise<void>;
-  findByUsername(data: IFindByUsernameDTO): Promise<User>;
-  follow(data: IFollowUserDTO): Promise<User>;
+  findByUsername(data: IFindByUsernameDTO): Promise<User | undefined>;
+  follow(data: IFollowUserDTO): Promise<void>;
 }

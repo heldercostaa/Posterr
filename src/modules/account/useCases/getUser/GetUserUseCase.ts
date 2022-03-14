@@ -14,7 +14,7 @@ export class GetUserUseCase {
     });
 
     if (!user) {
-      throw new AppError('User does not exist');
+      throw new AppError('User not found');
     }
 
     return user;

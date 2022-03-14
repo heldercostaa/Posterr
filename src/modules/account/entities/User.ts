@@ -21,11 +21,11 @@ export class User {
   @JoinTable({
     name: 'user_follow_user',
     joinColumn: {
-      name: 'user_following_id',
+      name: 'user_being_followed_id',
       referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: 'user_followed_id',
+      name: 'user_who_follows_id',
       referencedColumnName: 'id',
     },
   })

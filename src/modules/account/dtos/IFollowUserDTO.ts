@@ -1,4 +1,4 @@
 export interface IFollowUserDTO {
-  userToFollowId: string;
-  userToBeFollowedId: string;
+  userWhoFollowsId: string;
+  userBeingFollowedId: string;
 }
