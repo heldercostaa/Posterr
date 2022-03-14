@@ -9,6 +9,7 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "moduleResolution": "node",
     
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
