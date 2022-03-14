@@ -6,7 +6,7 @@ import createConnection from '@shared/database';
 
 let connection: Connection;
 
-describe('Follow User Controller', () => {
+describe('Unfollow User Controller', () => {
   beforeAll(async () => {
     connection = await createConnection('localhost');
     await connection.runMigrations();
@@ -17,7 +17,7 @@ describe('Follow User Controller', () => {
     await connection.close();
   });
 
-  it('should be able to follow a user', async () => {
+  it('should be able to unfollow a user', async () => {
     await request(app).post('/user').send({
       username: 'cat',
     });
@@ -28,53 +28,61 @@ describe('Follow User Controller', () => {
 
     await request(app).post('/user/follow/dog').set('username', 'cat').send();
 
-    const catResponse = await request(app).get('/user/cat').send();
-    const dogResponse = await request(app).get('/user/dog').send();
+    let catResponse = await request(app).get('/user/cat').send();
+    let dogResponse = await request(app).get('/user/dog').send();
 
-    expect(catResponse.body.following[0].username).toBe('dog');
-    expect(dogResponse.body.followers[0].username).toBe('cat');
+    expect(catResponse.body.following.length).toBe(1);
+    expect(dogResponse.body.followers.length).toBe(1);
+
+    await request(app).post('/user/unfollow/dog').set('username', 'cat').send();
+
+    catResponse = await request(app).get('/user/cat').send();
+    dogResponse = await request(app).get('/user/dog').send();
+
+    expect(catResponse.body.following.length).toBe(0);
+    expect(dogResponse.body.followers.length).toBe(0);
   });
 
-  it('should not be able to follow yourself', async () => {
+  it('should not be able to unfollow yourself', async () => {
     await request(app).post('/user').send({
       username: 'cat',
     });
 
     const response = await request(app)
-      .post('/user/follow/cat')
+      .post('/user/unfollow/cat')
       .set('username', 'cat')
       .send();
 
     expect(response.status).toBe(400);
   });
 
-  it('should not be able to follow a non existing user', async () => {
+  it('should not be able to unfollow a non existing user', async () => {
     await request(app).post('/user').send({
       username: 'cat',
     });
 
     const response = await request(app)
-      .post('/user/follow/non_existing')
+      .post('/user/unfollow/non_existing')
       .set('username', 'cat')
       .send();
 
     expect(response.status).toBe(400);
   });
 
-  it('should not be able to follow from non existing user', async () => {
+  it('should not be able to unfollow from non existing user', async () => {
     await request(app).post('/user').send({
       username: 'cat',
     });
 
     const response = await request(app)
-      .post('/user/follow/cat')
+      .post('/user/unfollow/cat')
       .set('username', 'non_existing')
       .send();
 
     expect(response.status).toBe(400);
   });
 
-  it('should not be able to follow a user twice', async () => {
+  it('should not be able to unfollow a user if is not a follower', async () => {
     await request(app).post('/user').send({
       username: 'cat',
     });
@@ -83,9 +91,8 @@ describe('Follow User Controller', () => {
       username: 'dog',
     });
 
-    await request(app).post('/user/follow/dog').set('username', 'cat').send();
     const response = await request(app)
-      .post('/user/follow/dog')
+      .post('/user/unfollow/dog')
       .set('username', 'cat')
       .send();
 

@@ -26,20 +26,20 @@ export class UnfollowUserUseCase {
       throw new AppError('Invalid user who unfollows');
     }
 
-    const followsUser = userWhoUnfollows.following.find(
-      (u) => u.username === userBeingUnfollowedUsername
-    );
-
-    if (!followsUser) {
-      throw new AppError('Already do not follow this user');
-    }
-
     const userBeingUnfollowed = await this.usersRepository.findBy({
       username: userBeingUnfollowedUsername,
     });
 
     if (!userBeingUnfollowed) {
       throw new AppError('Invalid user being unfollowed');
+    }
+
+    const followsUser = userWhoUnfollows.following.find(
+      (u) => u.username === userBeingUnfollowedUsername
+    );
+
+    if (!followsUser) {
+      throw new AppError('Already do not follow this user');
     }
 
     await this.usersRepository.unfollow({
