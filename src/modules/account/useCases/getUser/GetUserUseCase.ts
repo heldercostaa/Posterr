@@ -1,6 +1,6 @@
-import { AppError } from '@errors/AppError';
 import { User } from '@modules/account/entities/User';
 import { IUserRepository } from '@modules/account/repositories/IUserRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   username: string;

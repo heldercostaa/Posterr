@@ -1,4 +1,3 @@
-import { AppError } from '@errors/AppError';
 import { IUserRepository } from '@modules/account/repositories/IUserRepository';
 import { Post } from '@modules/post/entities/Post';
 import { QuotePost } from '@modules/post/entities/QuotePost';
@@ -6,6 +5,7 @@ import { Repost } from '@modules/post/entities/Repost';
 import { IPostRepository } from '@modules/post/repositories/IPostRepository';
 import { IQuotePostRepository } from '@modules/post/repositories/IQuotePostRepository';
 import { IRepostRepository } from '@modules/post/repositories/IRepostRepository';
+import { AppError } from '@shared/errors/AppError';
 
 type PostOrRepostOrQuotePost = Post | Repost | QuotePost;
 

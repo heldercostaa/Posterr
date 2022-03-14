@@ -1,7 +1,7 @@
-import { AppError } from '@errors/AppError';
 import { IUserRepository } from '@modules/account/repositories/IUserRepository';
 import { IPostRepository } from '@modules/post/repositories/IPostRepository';
 import { IQuotePostRepository } from '@modules/post/repositories/IQuotePostRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   message: string;

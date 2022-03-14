@@ -16,7 +16,7 @@
     "baseUrl": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
-      "@errors/*": ["errors/*"]
+      "@shared/*": ["shared/*"]
     }    
   }
 }

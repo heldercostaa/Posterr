@@ -1,11 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
-import { AppError } from '@errors/AppError';
-
-import { router } from './routes';
-
-import './database';
+import { router } from '@shared/app/routes';
+import { AppError } from '@shared/errors/AppError';
+import '@shared/database';
 
 const app = express();
 app.use(express.json());
@@ -21,5 +19,4 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-const port = 3333;
-app.listen(port, () => console.log(`✔ Server started on port ${port}!`));
+export { app };

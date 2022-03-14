@@ -1,5 +1,5 @@
-import { AppError } from '@errors/AppError';
 import { IUserRepository } from '@modules/account/repositories/IUserRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   userWhoUnfollowsUsername: string;
