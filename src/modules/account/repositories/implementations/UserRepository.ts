@@ -26,6 +26,7 @@ export class UserRepository implements IUserRepository {
     includeFollowing,
     includePosts,
     includeReposts,
+    includeQuotePosts,
   }: IFindByDTO): Promise<User | null> {
     let userQuery = this.repository.createQueryBuilder('user');
 
@@ -47,6 +48,10 @@ export class UserRepository implements IUserRepository {
 
     if (includeReposts) {
       userQuery = userQuery.leftJoinAndSelect('user.reposts', 'reposts');
+    }
+
+    if (includeQuotePosts) {
+      userQuery = userQuery.leftJoinAndSelect('user.quotePosts', 'quotePosts');
     }
 
     const user = await userQuery.getOne();

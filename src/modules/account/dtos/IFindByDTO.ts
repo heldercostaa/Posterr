@@ -4,4 +4,5 @@ export interface IFindByDTO {
   includeFollowing?: boolean;
   includePosts?: boolean;
   includeReposts?: boolean;
+  includeQuotePosts?: boolean;
 }

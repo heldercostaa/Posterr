@@ -16,6 +16,7 @@ export class GetUserUseCase {
       includeFollowing: true,
       includePosts: true,
       includeReposts: true,
+      includeQuotePosts: true,
     });
 
     if (!user) {
