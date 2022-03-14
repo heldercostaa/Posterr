@@ -1,8 +1,6 @@
 import { AppError } from '../../../../errors/AppError';
-import {
-  ICreateUserDTO,
-  IUserRepository,
-} from '../../repositories/IUserRepository';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { IUserRepository } from '../../repositories/IUserRepository';
 
 export class CreateUserUseCase {
   constructor(private usersRepository: IUserRepository) {}
@@ -16,9 +14,9 @@ export class CreateUserUseCase {
       throw new AppError('Username must be alphanumeric only');
     }
 
-    const userAlreadyExists = await this.usersRepository.findByUsername(
-      username
-    );
+    const userAlreadyExists = await this.usersRepository.findByUsername({
+      username,
+    });
 
     if (userAlreadyExists) {
       throw new AppError('User already exists');
