@@ -17,7 +17,7 @@ export class UnfollowUserUseCase {
       throw new AppError('Cannot unfollow yourself');
     }
 
-    const userWhoUnfollows = await this.usersRepository.findByUsername({
+    const userWhoUnfollows = await this.usersRepository.findBy({
       username: userWhoUnfollowsUsername,
       includeFollowing: true,
     });
@@ -34,7 +34,7 @@ export class UnfollowUserUseCase {
       throw new AppError('Already do not follow this user');
     }
 
-    const userBeingUnfollowed = await this.usersRepository.findByUsername({
+    const userBeingUnfollowed = await this.usersRepository.findBy({
       username: userBeingUnfollowedUsername,
     });
 

@@ -1,12 +1,12 @@
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
-import { IFindByUsernameDTO } from '../dtos/IFindByUsernameDTO';
+import { IFindByDTO } from '../dtos/IFindByDTO';
 import { IFollowUserDTO } from '../dtos/IFollowUserDTO';
 import { IUnfollowUserDTO } from '../dtos/IUnfollowUserDTO';
 import { User } from '../entities/User';
 
 export interface IUserRepository {
   create(data: ICreateUserDTO): Promise<void>;
-  findByUsername(data: IFindByUsernameDTO): Promise<User | undefined>;
+  findBy(data: IFindByDTO): Promise<User | null>;
   follow(data: IFollowUserDTO): Promise<void>;
   unfollow(data: IUnfollowUserDTO): Promise<void>;
 }

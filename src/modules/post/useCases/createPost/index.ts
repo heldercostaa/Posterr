@@ -10,7 +10,7 @@ export default (): CreatePostController => {
     postRepository,
     userRepository
   );
-  const createUserController = new CreatePostController(createPostUseCase);
+  const createPostController = new CreatePostController(createPostUseCase);
 
-  return createUserController;
+  return createPostController;
 };

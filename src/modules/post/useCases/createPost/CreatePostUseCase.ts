@@ -4,7 +4,7 @@ import { IPostRepository } from '../../repositories/IPostRepository';
 
 interface IRequest {
   creatorUsername: string;
-  message: string;
+  message: string | undefined;
 }
 
 export class CreatePostUseCase {
@@ -14,7 +14,7 @@ export class CreatePostUseCase {
   ) {}
 
   async execute({ creatorUsername, message }: IRequest): Promise<void> {
-    const creator = await this.usersRepository.findByUsername({
+    const creator = await this.usersRepository.findBy({
       username: creatorUsername,
     });
 
@@ -22,6 +22,9 @@ export class CreatePostUseCase {
       throw new AppError('User not found');
     }
 
-    await this.postsRepository.create({ userId: creator.id, message });
+    await this.postsRepository.create({
+      userId: creator.id,
+      message,
+    });
   }
 }

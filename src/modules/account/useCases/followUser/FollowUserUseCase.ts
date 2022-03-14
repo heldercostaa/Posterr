@@ -17,7 +17,7 @@ export class FollowUserUseCase {
       throw new AppError('Cannot follow yourself');
     }
 
-    const userWhoFollows = await this.usersRepository.findByUsername({
+    const userWhoFollows = await this.usersRepository.findBy({
       username: userWhoFollowsUsername,
       includeFollowing: true,
     });
@@ -34,7 +34,7 @@ export class FollowUserUseCase {
       throw new AppError('Already follow this user');
     }
 
-    const userBeingFollowed = await this.usersRepository.findByUsername({
+    const userBeingFollowed = await this.usersRepository.findBy({
       username: userBeingFollowedUsername,
     });
 

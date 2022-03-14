@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { IFindByUsernameDTO } from '../../dtos/IFindByUsernameDTO';
+import { IFindByDTO } from '../../dtos/IFindByDTO';
 import { IFollowUserDTO } from '../../dtos/IFollowUserDTO';
 import { IUnfollowUserDTO } from '../../dtos/IUnfollowUserDTO';
 import { User } from '../../entities/User';
@@ -20,22 +20,38 @@ export class UserRepository implements IUserRepository {
     await this.repository.save(user);
   }
 
-  async findByUsername({
+  async findBy({
     username,
-    includeFollowers = false,
-    includeFollowing = false,
-  }: IFindByUsernameDTO): Promise<User | undefined> {
-    const relations = [];
+    includeFollowers,
+    includeFollowing,
+    includePosts,
+    includeReposts,
+  }: IFindByDTO): Promise<User | null> {
+    let userQuery = this.repository.createQueryBuilder('user');
 
-    if (includeFollowers) relations.push('followers');
-    if (includeFollowing) relations.push('following');
+    if (username) {
+      userQuery = userQuery.andWhere('user.username = :username', { username });
+    }
 
-    const user = await this.repository.findOne({
-      relations,
-      where: { username },
-    });
+    if (includeFollowers) {
+      userQuery = userQuery.leftJoinAndSelect('user.followers', 'followers');
+    }
 
-    return user;
+    if (includeFollowing) {
+      userQuery = userQuery.leftJoinAndSelect('user.following', 'following');
+    }
+
+    if (includePosts) {
+      userQuery = userQuery.leftJoinAndSelect('user.posts', 'posts');
+    }
+
+    if (includeReposts) {
+      userQuery = userQuery.leftJoinAndSelect('user.reposts', 'reposts');
+    }
+
+    const user = await userQuery.getOne();
+
+    return user || null;
   }
 
   async follow({

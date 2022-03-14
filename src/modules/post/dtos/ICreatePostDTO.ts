@@ -1,4 +1,4 @@
 export class ICreatePostDTO {
   userId: string;
-  message: string;
+  message: string | undefined;
 }

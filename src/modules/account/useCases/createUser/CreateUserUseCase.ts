@@ -17,7 +17,7 @@ export class CreateUserUseCase {
       throw new AppError('Username must be alphanumeric only');
     }
 
-    const userAlreadyExists = await this.usersRepository.findByUsername({
+    const userAlreadyExists = await this.usersRepository.findBy({
       username,
     });
 
