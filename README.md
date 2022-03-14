@@ -25,6 +25,9 @@ This configuration is intended to be used with VSCode, other IDEs were not teste
 - Make sure to have the file `ormconfig.json` proper configured with the connection variables.
 - After creating the database (via docker or other method), a migration run is required so all the tables are created. The command `$ yarn typeorm migration:run` (or `$ npm run typeorm migration:run`) will create all the necessary database schema.
 
+Here's the database Diagram for reference:
+![Database Diagram](./database_diagram.png)
+
 > **Dev Script**
 
 - With the database already set up and running, run the `dev` script and the application should start.
@@ -32,6 +35,7 @@ This configuration is intended to be used with VSCode, other IDEs were not teste
 ```bash
 $ yarn dev        # npm run dev
 ```
+
 
 > **Tests**
 
@@ -105,3 +109,55 @@ GET /post/self
 Header: { username: cat }
 ```
 
+## Use Cases
+
+These are the Use Cases used to develop the application
+
+- it should be able to get all posts from everyone (normal posts, reposts and quote posts)
+- it should be able to get all posts by those who they follow (normal posts, reposts and quote posts)
+- it should be able to create a new post
+- it should be able to repost a post
+- it should be able to quote post a post
+- (EXTRA) it should be able to create a user
+- it should be able to get user data
+- it should be able to follow a user
+- it should not be able to follow a user if they are already followed
+- it should be able to unfollow a user
+- it should not be able to unfollow a user if they already not follow
+- it should not be able to follow themself
+- it should be able to get all posts by themself (normal posts, reposts and quote posts)
+- it should be able to check if they follow the user or not
+- it should not be able to post a message greater than 777 characters
+- it should not be able to post a empty message
+- (MISSING) it should not be able to post more than 5 posts per day (including reposts and quote posts)
+
+## Phase 2: Planning
+
+My questions to the Product Manager about the `reply-to-post` functionality:
+
+- Would the user be able to see all the replied posts in the original one? Like comments in Facebook posts, for example
+- The reply will also be a post?
+- Would be possible to reply to a reply?
+- Should we notify the creator of the main post that someone replied to their post?
+- Should we take reply in consideration to show recommended posts to user?
+- Should the secondary feed loads in real-time to show new replied?
+
+Considering a first basic scenario where the backend will only implement the reply post logic and return to the frontend on an endpoint as a first phase of implementation, these would be my next steps:
+
+- Considering the implemented database schema, I'd probably create a `ReplyPost` entity similar to the others
+- Relate that new entity to the User, to make sure we store who created that reply
+- I'd create new endpoints similar to '/repost' and '/quotePost' so the frontend can call and we effectively create the record
+- And Adjust the list all post methods and user data to make sure we're returning the Replies as well
+
+## Phase 3: Critique
+
+- First I'd like to have it done in a faster time. Due to wanting to apply as most knowledge as I could I ended spending more than 8 hours to develop the application
+- Finishing the tests under `post` module would also be a next step for this project, aiming to have 100% test coverage
+- I wish I could added a validation on a controller level as well, to avoid getting wrong inputs in the controller layer and not only on the service
+- Also, double check the `cascade` delete options on the relations of the database to make sure everything is correct
+- Since the project will probably have a lot of requests, I'd also do a performance test on each endpoint and check what could be improved in the database queries
+- I didn't like 100% how to manage Posts, Reposts and QuotePosts (specially in to grab them), I feel these tables have a lot of similarities that maybe they could even be in just one table to increase performance (I tried that first approach but ended up taking too much time). If I had more time to investigate I'd definitely check how we can improve that
+- Adding the Request Endpoints to on README is not ideal as well, with more time I'd add some library such as `Swagger` to better document the API
+- Would also take a look to integrate Sentry to monitor the application and rate limiter to avoid too many requests to the server
+- I'd also double check the API responses to make sure they all makes sense to the frontend, or if any information is missing
+- Finally, if the application started to grow and the database became a pain point, I'd also consider changing it (or some parts) to a faster one
