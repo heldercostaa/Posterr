@@ -1,9 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreateQuotePostDTO } from '../../dtos/ICreateQuotePostDTO';
-import { IListAllQuotePostByDTO } from '../../dtos/IListAllQuotePostByDTO';
-import { IQuotePostFindByDTO } from '../../dtos/IQuotePostFindByDTO';
-import { QuotePost } from '../../entities/QuotePost';
+import { ICreateQuotePostDTO } from '@modules/post/dtos/ICreateQuotePostDTO';
+import { IListAllQuotePostByDTO } from '@modules/post/dtos/IListAllQuotePostByDTO';
+import { IQuotePostFindByDTO } from '@modules/post/dtos/IQuotePostFindByDTO';
+import { QuotePost } from '@modules/post/entities/QuotePost';
+
 import { IQuotePostRepository } from '../IQuotePostRepository';
 
 export class QuotePostRepository implements IQuotePostRepository {

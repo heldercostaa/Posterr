@@ -1,7 +1,7 @@
-import { AppError } from '../../../../errors/AppError';
-import { IUserRepository } from '../../../account/repositories/IUserRepository';
-import { IPostRepository } from '../../repositories/IPostRepository';
-import { IQuotePostRepository } from '../../repositories/IQuotePostRepository';
+import { AppError } from '@errors/AppError';
+import { IUserRepository } from '@modules/account/repositories/IUserRepository';
+import { IPostRepository } from '@modules/post/repositories/IPostRepository';
+import { IQuotePostRepository } from '@modules/post/repositories/IQuotePostRepository';
 
 interface IRequest {
   message: string;

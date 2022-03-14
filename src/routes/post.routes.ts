@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import createPostController from '../modules/post/useCases/createPost';
-import createQuotePostController from '../modules/post/useCases/createQuotePost';
-import listFollowingPostsController from '../modules/post/useCases/listFollowingPosts';
-import listPostsController from '../modules/post/useCases/listPosts';
-import listSelfPostsController from '../modules/post/useCases/listSelfPosts';
-import repostController from '../modules/post/useCases/repost';
+import createPostController from '@modules/post/useCases/createPost';
+import createQuotePostController from '@modules/post/useCases/createQuotePost';
+import listFollowingPostsController from '@modules/post/useCases/listFollowingPosts';
+import listPostsController from '@modules/post/useCases/listPosts';
+import listSelfPostsController from '@modules/post/useCases/listSelfPosts';
+import repostController from '@modules/post/useCases/repost';
 
 export const postRouter = Router();
 

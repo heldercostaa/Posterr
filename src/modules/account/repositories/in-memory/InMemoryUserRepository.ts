@@ -1,8 +1,9 @@
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { IFindByDTO } from '../../dtos/IFindByDTO';
-import { IFollowUserDTO } from '../../dtos/IFollowUserDTO';
-import { IUnfollowUserDTO } from '../../dtos/IUnfollowUserDTO';
-import { User } from '../../entities/User';
+import { ICreateUserDTO } from '@modules/account/dtos/ICreateUserDTO';
+import { IFindByDTO } from '@modules/account/dtos/IFindByDTO';
+import { IFollowUserDTO } from '@modules/account/dtos/IFollowUserDTO';
+import { IUnfollowUserDTO } from '@modules/account/dtos/IUnfollowUserDTO';
+import { User } from '@modules/account/entities/User';
+
 import { IUserRepository } from '../IUserRepository';
 
 export class InMemoryUserRepository implements IUserRepository {

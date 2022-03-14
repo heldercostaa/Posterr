@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import createUserController from '../modules/account/useCases/createUser';
-import followUserController from '../modules/account/useCases/followUser';
-import getUserController from '../modules/account/useCases/getUser';
-import unfollowUserController from '../modules/account/useCases/unfollowUser';
+import createUserController from '@modules/account/useCases/createUser';
+import followUserController from '@modules/account/useCases/followUser';
+import getUserController from '@modules/account/useCases/getUser';
+import unfollowUserController from '@modules/account/useCases/unfollowUser';
 
 export const userRoutes = Router();
 

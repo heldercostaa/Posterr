@@ -1,4 +1,5 @@
-import { UserRepository } from '../../repositories/typeorm/UserRepository';
+import { UserRepository } from '@modules/account/repositories/typeorm/UserRepository';
+
 import { CreateUserController } from './CreateUserController';
 import { CreateUserUseCase } from './CreateUserUseCase';
 

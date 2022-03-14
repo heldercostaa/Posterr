@@ -10,9 +10,9 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { Post } from '../../post/entities/Post';
-import { QuotePost } from '../../post/entities/QuotePost';
-import { Repost } from '../../post/entities/Repost';
+import { Post } from '@modules/post/entities/Post';
+import { QuotePost } from '@modules/post/entities/QuotePost';
+import { Repost } from '@modules/post/entities/Repost';
 
 @Entity('user')
 export class User {

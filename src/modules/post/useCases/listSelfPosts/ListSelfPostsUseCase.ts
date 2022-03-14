@@ -1,11 +1,11 @@
-import { AppError } from '../../../../errors/AppError';
-import { IUserRepository } from '../../../account/repositories/IUserRepository';
-import { Post } from '../../entities/Post';
-import { QuotePost } from '../../entities/QuotePost';
-import { Repost } from '../../entities/Repost';
-import { IPostRepository } from '../../repositories/IPostRepository';
-import { IQuotePostRepository } from '../../repositories/IQuotePostRepository';
-import { IRepostRepository } from '../../repositories/IRepostRepository';
+import { AppError } from '@errors/AppError';
+import { IUserRepository } from '@modules/account/repositories/IUserRepository';
+import { Post } from '@modules/post/entities/Post';
+import { QuotePost } from '@modules/post/entities/QuotePost';
+import { Repost } from '@modules/post/entities/Repost';
+import { IPostRepository } from '@modules/post/repositories/IPostRepository';
+import { IQuotePostRepository } from '@modules/post/repositories/IQuotePostRepository';
+import { IRepostRepository } from '@modules/post/repositories/IRepostRepository';
 
 type PostOrRepostOrQuotePost = Post | Repost | QuotePost;
 

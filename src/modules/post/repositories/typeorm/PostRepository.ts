@@ -1,9 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreatePostDTO } from '../../dtos/ICreatePostDTO';
-import { IListAllPostByDTO } from '../../dtos/IListAllPostByDTO';
-import { IPostFindByDTO } from '../../dtos/IPostFindByDTO';
-import { Post } from '../../entities/Post';
+import { ICreatePostDTO } from '@modules/post/dtos/ICreatePostDTO';
+import { IListAllPostByDTO } from '@modules/post/dtos/IListAllPostByDTO';
+import { IPostFindByDTO } from '@modules/post/dtos/IPostFindByDTO';
+import { Post } from '@modules/post/entities/Post';
+
 import { IPostRepository } from '../IPostRepository';
 
 export class PostRepository implements IPostRepository {

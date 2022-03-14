@@ -1,5 +1,5 @@
-import { AppError } from '../../../../errors/AppError';
-import { IUserRepository } from '../../repositories/IUserRepository';
+import { AppError } from '@errors/AppError';
+import { IUserRepository } from '@modules/account/repositories/IUserRepository';
 
 interface IRequest {
   username: string;
