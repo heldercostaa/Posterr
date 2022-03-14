@@ -29,7 +29,7 @@ describe('Get User Controller', () => {
   });
 
   it('should not be able to get user if username does not exists', async () => {
-    const response = await request(app).get(`/user/cat`);
+    const response = await request(app).get(`/user/dog`);
 
     expect(response.status).toBe(400);
   });

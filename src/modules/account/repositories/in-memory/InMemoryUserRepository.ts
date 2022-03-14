@@ -11,6 +11,8 @@ export class InMemoryUserRepository implements IUserRepository {
 
   async create({ username }: ICreateUserDTO): Promise<void> {
     const user = new User();
+    user.followers = [];
+    user.following = [];
 
     Object.assign(user, { username });
 
@@ -23,11 +25,40 @@ export class InMemoryUserRepository implements IUserRepository {
     return user || null;
   }
 
-  async follow(data: IFollowUserDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+  async follow({
+    userWhoFollowsId,
+    userBeingFollowedId,
+  }: IFollowUserDTO): Promise<void> {
+    const userWhoFollows = this.users.find((u) => u.id === userWhoFollowsId);
+    const userBeingFollowed = this.users.find(
+      (u) => u.id === userBeingFollowedId
+    );
+
+    if (!userWhoFollows || !userBeingFollowed) return;
+
+    userWhoFollows.following.push(userBeingFollowed);
+    userBeingFollowed.followers.push(userWhoFollows);
   }
 
-  async unfollow(data: IUnfollowUserDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+  async unfollow({
+    userWhoUnfollowsId,
+    userBeingUnfollowedId,
+  }: IUnfollowUserDTO): Promise<void> {
+    const userWhoUnfollows = this.users.find(
+      (u) => u.id === userWhoUnfollowsId
+    );
+    const userBeingUnfollowed = this.users.find(
+      (u) => u.id === userBeingUnfollowedId
+    );
+
+    if (!userWhoUnfollows || !userBeingUnfollowed) return;
+
+    userWhoUnfollows.following = userWhoUnfollows.following.filter(
+      (u) => u.id !== userBeingUnfollowedId
+    );
+
+    userBeingUnfollowed.followers = userBeingUnfollowed.followers.filter(
+      (u) => u.id !== userWhoUnfollowsId
+    );
   }
 }
