@@ -4,7 +4,7 @@ import { IPostRepository } from '../../repositories/IPostRepository';
 
 interface IRequest {
   creatorUsername: string;
-  message: string | undefined;
+  message: string;
 }
 
 export class CreatePostUseCase {
@@ -14,6 +14,14 @@ export class CreatePostUseCase {
   ) {}
 
   async execute({ creatorUsername, message }: IRequest): Promise<void> {
+    if (message.trim().length === 0) {
+      throw new AppError('Message must not be empty');
+    }
+
+    if (message.length > 777) {
+      throw new AppError('Message must not exceed 777 characters');
+    }
+
     const creator = await this.usersRepository.findBy({
       username: creatorUsername,
     });
