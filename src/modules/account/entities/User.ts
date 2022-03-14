@@ -11,6 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 
 import { Post } from '../../post/entities/Post';
+import { QuotePost } from '../../post/entities/QuotePost';
 import { Repost } from '../../post/entities/Repost';
 
 @Entity('user')
@@ -43,6 +44,9 @@ export class User {
 
   @OneToMany(() => Repost, (repost) => repost.creator)
   reposts: Repost[];
+
+  @OneToMany(() => QuotePost, (quotePost) => quotePost.creator)
+  quotePosts: QuotePost[];
 
   @CreateDateColumn()
   created_at: Date;

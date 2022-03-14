@@ -22,15 +22,15 @@ export class PostRepository implements IPostRepository {
     await this.repository.save(post);
   }
 
-  async findBy({ id, userId }: IPostFindByDTO): Promise<Post | null> {
+  async findBy({ id, creatorId }: IPostFindByDTO): Promise<Post | null> {
     let postQuery = this.repository.createQueryBuilder('post');
 
     if (id) {
       postQuery = postQuery.andWhere('id = :id', { id });
     }
 
-    if (userId) {
-      postQuery = postQuery.andWhere('userId = :userId', { userId });
+    if (creatorId) {
+      postQuery = postQuery.andWhere('creatorId = :creatorId', { creatorId });
     }
 
     const post = await postQuery.getOne();

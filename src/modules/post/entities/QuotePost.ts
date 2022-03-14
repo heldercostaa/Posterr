@@ -3,18 +3,16 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import { User } from '../../account/entities/User';
-import { QuotePost } from './QuotePost';
-import { Repost } from './Repost';
+import { Post } from './Post';
 
-@Entity('post')
-export class Post {
+@Entity('quote_post')
+export class QuotePost {
   @PrimaryColumn()
   id: string;
 
@@ -24,21 +22,20 @@ export class Post {
   @Column()
   creatorId: string;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.quotePosts)
   creator: User;
 
-  @OneToMany(() => Repost, (repost) => repost.originalPost)
-  reposts: Repost[];
+  @Column()
+  originalPostId: string;
 
-  @OneToMany(() => QuotePost, (quotePost) => quotePost.originalPost)
-  quotePosts: QuotePost[];
+  @ManyToOne(() => Post, (post) => post.quotePosts)
+  originalPost: Post;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
   constructor() {
     if (!this.id) this.id = uuidV4();
   }

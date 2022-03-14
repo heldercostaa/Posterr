@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import createPostController from '../modules/post/useCases/createPost';
+import createQuotePostController from '../modules/post/useCases/createQuotePost';
 import listFollowingPostsController from '../modules/post/useCases/listFollowingPosts';
 import listPostsController from '../modules/post/useCases/listPosts';
 import listSelfPostsController from '../modules/post/useCases/listSelfPosts';
@@ -14,6 +15,10 @@ postRouter.post('/', (request, response) => {
 
 postRouter.post('/:id/repost', (request, response) => {
   return repostController().handle(request, response);
+});
+
+postRouter.post('/:id/quotePost', (request, response) => {
+  return createQuotePostController().handle(request, response);
 });
 
 postRouter.get('/', (request, response) => {
