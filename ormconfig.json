@@ -5,9 +5,9 @@
   "username": "user",
   "password": "password",
   "database": "posterrdb",
-  "migrations": ["./src/database/migrations/*.ts"],
+  "migrations": ["./src/shared/database/migrations/*.ts"],
   "entities": ["./src/modules/**/entities/*.ts"],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/shared/database/migrations"
   }
 }

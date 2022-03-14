@@ -22,7 +22,7 @@ describe('Create User', () => {
     expect(user).toHaveProperty('id');
   });
 
-  it('should be able to create a new user', async () => {
+  it('should not be able to create a new user if name already exists', async () => {
     expect(async () => {
       const username = 'cat';
 

@@ -5,7 +5,8 @@ import { router } from '@shared/app/routes';
 import createConnection from '@shared/database';
 import { AppError } from '@shared/errors/AppError';
 
-createConnection();
+if (process.env.NODE_ENV !== 'test') createConnection('localhost');
+
 const app = express();
 
 app.use(express.json());
