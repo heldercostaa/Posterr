@@ -1,5 +1,5 @@
-import { UserRepository } from '../../../account/repositories/implementations/UserRepository';
-import { PostRepository } from '../../repositories/implementations/PostRepository';
+import { UserRepository } from '../../../account/repositories/typeorm/UserRepository';
+import { PostRepository } from '../../repositories/typeorm/PostRepository';
 import { CreatePostController } from './CreatePostController';
 import { CreatePostUseCase } from './CreatePostUseCase';
 

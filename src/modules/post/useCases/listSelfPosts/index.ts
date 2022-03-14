@@ -1,7 +1,7 @@
-import { UserRepository } from '../../../account/repositories/implementations/UserRepository';
-import { PostRepository } from '../../repositories/implementations/PostRepository';
-import { QuotePostRepository } from '../../repositories/implementations/QuotePostRepository';
-import { RepostRepository } from '../../repositories/implementations/RepostRepository';
+import { UserRepository } from '../../../account/repositories/typeorm/UserRepository';
+import { PostRepository } from '../../repositories/typeorm/PostRepository';
+import { QuotePostRepository } from '../../repositories/typeorm/QuotePostRepository';
+import { RepostRepository } from '../../repositories/typeorm/RepostRepository';
 import { ListSelfPostsController } from './ListSelfPostsController';
 import { ListSelfPostsUseCase } from './ListSelfPostsUseCase';
 

@@ -1,6 +1,6 @@
-import { UserRepository } from '../../../account/repositories/implementations/UserRepository';
-import { PostRepository } from '../../repositories/implementations/PostRepository';
-import { RepostRepository } from '../../repositories/implementations/RepostRepository';
+import { UserRepository } from '../../../account/repositories/typeorm/UserRepository';
+import { PostRepository } from '../../repositories/typeorm/PostRepository';
+import { RepostRepository } from '../../repositories/typeorm/RepostRepository';
 import { RepostController } from './RepostController';
 import { RepostUseCase } from './RepostUseCase';
 

@@ -1,4 +1,4 @@
-import { UserRepository } from '../../repositories/implementations/UserRepository';
+import { UserRepository } from '../../repositories/typeorm/UserRepository';
 import { UnfollowUserController } from './UnfollowUserController';
 import { UnfollowUserUseCase } from './UnfollowUserUseCase';
 

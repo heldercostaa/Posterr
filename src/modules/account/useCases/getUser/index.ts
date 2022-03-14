@@ -1,4 +1,4 @@
-import { UserRepository } from '../../repositories/implementations/UserRepository';
+import { UserRepository } from '../../repositories/typeorm/UserRepository';
 import { GetUserController } from './GetUserController';
 import { GetUserUseCase } from './GetUserUseCase';
 
