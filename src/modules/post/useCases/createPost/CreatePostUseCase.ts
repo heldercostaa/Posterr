@@ -31,7 +31,7 @@ export class CreatePostUseCase {
     }
 
     await this.postsRepository.create({
-      userId: creator.id,
+      creatorId: creator.id,
       message,
     });
   }

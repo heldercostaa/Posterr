@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreateRepostDTO } from '../../dtos/ICreateRepostDTO';
+import { IListAllRepostByDTO } from '../../dtos/IListAllRepostByDTO';
 import { IRepostFindByDTO } from '../../dtos/IRepostFindByDTO';
 import { Repost } from '../../entities/Repost';
 import { IRepostRepository } from '../IRepostRepository';
@@ -32,8 +33,18 @@ export class RepostRepository implements IRepostRepository {
     return repost || null;
   }
 
-  async listAll(): Promise<Repost[]> {
-    const posts = await this.repository.find();
+  async listAllRepostBy({
+    creatorIds,
+  }: IListAllRepostByDTO): Promise<Repost[]> {
+    let repostQuery = this.repository.createQueryBuilder('repost');
+
+    if (creatorIds && creatorIds.length > 0) {
+      repostQuery = repostQuery.andWhere('"creatorId" IN (:...creatorIds)', {
+        creatorIds,
+      });
+    }
+
+    const posts = await repostQuery.getMany();
 
     return posts;
   }

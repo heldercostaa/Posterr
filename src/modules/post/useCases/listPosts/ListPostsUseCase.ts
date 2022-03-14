@@ -12,8 +12,8 @@ export class ListPostsUseCase {
   ) {}
 
   async execute(): Promise<PostOrRepost[]> {
-    const posts = await this.postRepository.listAll();
-    const reposts = await this.repostRepository.listAll();
+    const posts = await this.postRepository.listAllPostBy({});
+    const reposts = await this.repostRepository.listAllRepostBy({});
 
     const postsAndReposts: PostOrRepost[] = [...posts, ...reposts];
 

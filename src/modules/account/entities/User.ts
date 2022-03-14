@@ -38,7 +38,7 @@ export class User {
   @ManyToMany(() => User, (user) => user.followers)
   following: this[];
 
-  @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.creator)
   posts: Post[];
 
   @OneToMany(() => Repost, (repost) => repost.creator)

@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreatePostDTO } from '../../dtos/ICreatePostDTO';
+import { IListAllPostByDTO } from '../../dtos/IListAllPostByDTO';
 import { IPostFindByDTO } from '../../dtos/IPostFindByDTO';
 import { Post } from '../../entities/Post';
 import { IPostRepository } from '../IPostRepository';
@@ -12,9 +13,9 @@ export class PostRepository implements IPostRepository {
     this.repository = getRepository(Post);
   }
 
-  async create({ userId, message }: ICreatePostDTO): Promise<void> {
+  async create({ creatorId, message }: ICreatePostDTO): Promise<void> {
     const post = this.repository.create({
-      user: { id: userId },
+      creator: { id: creatorId },
       message,
     });
 
@@ -37,8 +38,16 @@ export class PostRepository implements IPostRepository {
     return post || null;
   }
 
-  async listAll(): Promise<Post[]> {
-    const posts = await this.repository.find();
+  async listAllPostBy({ creatorIds }: IListAllPostByDTO): Promise<Post[]> {
+    let postQuery = this.repository.createQueryBuilder('post');
+
+    if (creatorIds && creatorIds.length > 0) {
+      postQuery = postQuery.andWhere('"creatorId" IN (:...creatorIds)', {
+        creatorIds,
+      });
+    }
+
+    const posts = await postQuery.getMany();
 
     return posts;
   }

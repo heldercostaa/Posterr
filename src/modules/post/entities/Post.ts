@@ -21,10 +21,10 @@ export class Post {
   message: string;
 
   @Column()
-  userId: string;
+  creatorId: string;
 
   @ManyToOne(() => User, (user) => user.posts)
-  user: User;
+  creator: User;
 
   @OneToMany(() => Repost, (repost) => repost.originalPost)
   reposts: Repost[];
