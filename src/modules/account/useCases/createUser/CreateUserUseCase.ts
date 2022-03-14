@@ -1,11 +1,14 @@
 import { AppError } from '../../../../errors/AppError';
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { IUserRepository } from '../../repositories/IUserRepository';
+
+interface IRequest {
+  username: string;
+}
 
 export class CreateUserUseCase {
   constructor(private usersRepository: IUserRepository) {}
 
-  async execute({ username }: ICreateUserDTO): Promise<void> {
+  async execute({ username }: IRequest): Promise<void> {
     if (username.length > 14) {
       throw new AppError('Username must be longer than 14 characters');
     }

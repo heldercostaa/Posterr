@@ -4,10 +4,13 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Post } from '../../post/entities/Post';
 
 @Entity('user')
 export class User {
@@ -33,6 +36,9 @@ export class User {
 
   @ManyToMany(() => User, (user) => user.followers)
   following: this[];
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 
   @CreateDateColumn()
   created_at: string;
