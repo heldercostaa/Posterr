@@ -1,5 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
+import { AppError } from '../../../../errors/AppError';
 import { User } from '../../entities/User';
 import {
   ICreateUserDTO,
@@ -31,6 +32,6 @@ export class UserRepository implements IUserRepository {
     userToBeFollowedId,
   }: IFollowUserDTO): Promise<User> {
     // TODO: Implement
-    throw new Error('Method not implemented.');
+    throw new AppError('Method not implemented');
   }
 }
