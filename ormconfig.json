@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "user",
+  "password": "password",
+  "database": "posterrdb",
+  "migrations": ["./src/shared/database/migrations/*.ts"],
+  "entities": ["./src/modules/**/entities/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/database/migrations"
+  }
+}
