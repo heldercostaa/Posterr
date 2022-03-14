@@ -31,4 +31,10 @@ export class RepostRepository implements IRepostRepository {
 
     return repost || null;
   }
+
+  async listAll(): Promise<Repost[]> {
+    const posts = await this.repository.find();
+
+    return posts;
+  }
 }

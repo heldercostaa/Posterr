@@ -36,4 +36,10 @@ export class PostRepository implements IPostRepository {
 
     return post || null;
   }
+
+  async listAll(): Promise<Post[]> {
+    const posts = await this.repository.find();
+
+    return posts;
+  }
 }

@@ -5,4 +5,5 @@ import { Repost } from '../entities/Repost';
 export interface IRepostRepository {
   create(data: ICreateRepostDTO): Promise<void>;
   findBy(data: IRepostFindByDTO): Promise<Repost | null>;
+  listAll(): Promise<Repost[]>;
 }

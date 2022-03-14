@@ -5,4 +5,5 @@ import { Post } from '../entities/Post';
 export interface IPostRepository {
   create(data: ICreatePostDTO): Promise<void>;
   findBy(data: IPostFindByDTO): Promise<Post | null>;
+  listAll(): Promise<Post[]>;
 }
