@@ -2,10 +2,12 @@ import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
 import { router } from '@shared/app/routes';
+import createConnection from '@shared/database';
 import { AppError } from '@shared/errors/AppError';
-import '@shared/database';
 
+createConnection();
 const app = express();
+
 app.use(express.json());
 app.use(router);
 
