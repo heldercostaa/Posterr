@@ -1,8 +1,9 @@
 import { Router } from 'express';
 
 import createPostController from '../modules/post/useCases/createPost';
-import listFollowersController from '../modules/post/useCases/listFollowingPosts';
+import listFollowingPostsController from '../modules/post/useCases/listFollowingPosts';
 import listPostsController from '../modules/post/useCases/listPosts';
+import listSelfPostsController from '../modules/post/useCases/listSelfPosts';
 import repostController from '../modules/post/useCases/repost';
 
 export const postRouter = Router();
@@ -20,5 +21,9 @@ postRouter.get('/', (request, response) => {
 });
 
 postRouter.get('/following', (request, response) => {
-  return listFollowersController().handle(request, response);
+  return listFollowingPostsController().handle(request, response);
+});
+
+postRouter.get('/self', (request, response) => {
+  return listSelfPostsController().handle(request, response);
 });
